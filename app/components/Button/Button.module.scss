@@ -1,0 +1,32 @@
+@use '../../styles/mixins' as *;
+
+.button {
+  @include subheading;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 200px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &.primary {
+    background-color: var(--color-button-primary);
+    color: var(--color-text-light);
+  }
+
+  &.secondary {
+    background-color: var(--color-button-secondary);
+    color: var(--color-text-light);
+  }
+
+  &.light {
+    background-color: var(--color-button-link);
+    color: var(--color-text-dark);
+  }
+
+  &.rounded {
+    border-radius: 20px;
+  }
+}

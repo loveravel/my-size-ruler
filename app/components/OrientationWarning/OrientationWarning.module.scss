@@ -1,0 +1,47 @@
+.main {
+  padding: 0;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 70px;
+  padding: 62px 86px;
+  height: 100vh;
+}
+
+.animation {
+  display: flex;
+  align-items: center;
+  animation: rotateAnimation 2s ease-in-out forwards infinite;
+
+  img {
+    height: 250px;
+  }
+}
+
+@keyframes rotateAnimation {
+  0% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  margin-bottom: 64px;
+}
+
+.text {
+  white-space: nowrap; /* исправление для nowrap */
+}

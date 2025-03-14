@@ -1,0 +1,39 @@
+.elite {
+  margin: 10px 112px 36px;
+  max-width: 128px;
+}
+
+.packs {
+  position: relative;
+  margin: 0 40px 32px;
+  max-width: 380px;
+
+  img {
+    position: relative;
+    z-index: 1;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 143%;
+    height: 143%;
+    transform: translate(-50%, -50%);
+    background: url("/images/stars-bg.svg") no-repeat center;
+    background-size: 100%;
+  }
+}
+
+.sizes {
+  margin-bottom: 60px;
+}
+
+.text {
+  margin-bottom: 57px;
+}
+
+.button {
+  margin-top: auto;
+}

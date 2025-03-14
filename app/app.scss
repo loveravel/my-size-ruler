@@ -1,0 +1,234 @@
+@use "tailwindcss" as *;
+@use "./styles/mixins" as *;
+@import 'normalize.css';
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+
+@font-face {
+  font-family: "DIN Pro";
+  src: url("/fonts/DINPro-CondensedRegular.woff2") format("woff2"),
+  url("/fonts/DINPro-CondensedRegular.woff") format("woff");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "DIN Pro";
+  src: url("/fonts/DINPro-CondensedBold.woff2") format("woff2"),
+  url("/fonts/DINPro-CondensedBold.woff") format("woff");
+  font-weight: 700;
+}
+
+:root {
+  --color-screen-background: #3A3A3A;
+  --color-button-primary: #F6B805;
+  --color-button-secondary: #808080;
+  --color-button-link: #E4E4E4;
+  --color-button-control: #D9D9D9;
+  --color-range-line: #535353;
+  --color-range-thumb: #1AACF7;
+  --color-text-light: #FFFFFF;
+  --color-text-dark: #000F38;
+  --color-condom: #E4E4E4;
+
+  --color-line-common: #1AACF7;
+  --color-line-accent: #F6B805;
+
+  --color-green-teal: #0C9B86;
+  --color-green: #22932B;
+  --color-olive: #9DB60A;
+  --color-gold: #F6B805;
+  --color-orange: #E66804;
+  --color-red: #FC1D27;
+  --color-pink: #F5329B;
+  --color-purple: #B93ED6;
+  --color-blue: #0F7AEB;
+
+  --font-din: "DIN Pro";
+  --font-roboto: "Roboto";
+  --font-montserrat: "Montserrat";
+
+  --font-weight-700: 700;
+  --font-weight-600: 700;
+  --font-weight-400: 400;
+
+  --font-size-giant: 50px;
+  --font-size-xxxl: 40px;
+  --font-size-xxl: 30px;
+  --font-size-xl: 24px;
+  --font-size-lg: 20px;
+  --font-size-base: 16px;
+  --font-size-md: 14px;
+
+  --line-height-sm: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: var(--font-roboto), sans-serif;
+  background-color: var(--color-screen-background);
+  color: var(--color-text-light);
+  overflow: hidden;
+}
+
+main {
+  position: relative;
+  padding: 42px 37px 40px;
+  height: 100vh;
+
+  &.top-line {
+    &::before {
+      content: "";
+      position: absolute;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      right: 0;
+      height: 8px;
+
+      @media (min-width: 769px) {
+        height: 12px;
+      }
+    }
+
+    &--common::before {
+      background-color: var(--color-line-common);
+    }
+    &--45::before {
+      background-color: var(--color-green-teal);
+    }
+    &--47::before {
+      background-color: var(--color-green);
+    }
+    &--49::before {
+      background-color: var(--color-olive);
+    }
+    &--53::before {
+      background-color: var(--color-gold);
+    }
+    &--57::before {
+      background-color: var(--color-orange);
+    }
+    &--60::before {
+      background-color: var(--color-red);
+    }
+    &--64::before {
+      background-color: var(--color-pink);
+    }
+    &--69::before {
+      background-color: var(--color-purple);
+    }
+    &--72::before {
+      background-color: var(--color-blue);
+    }
+  }
+
+  .lighting,
+  .stars {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 0;
+      display: none;
+      pointer-events: none;
+    }
+
+    &--left-top {
+      &::before {
+        display: block;
+        top: 0;
+        left: 0;
+        transform: rotate(180deg);
+      }
+    }
+
+    &--left-bottom {
+      &::before {
+        display: block;
+        bottom: 0;
+        left: -1px;
+        transform: rotate(90deg);
+      }
+    }
+
+    &--right-top {
+      &::after {
+        display: block;
+        right: -1px;
+        top: 0;
+        transform: rotate(-90deg);
+      }
+    }
+
+    &--right-bottom {
+      &::after {
+        display: block;
+        right: 0;
+        bottom: 0;
+      }
+    }
+  }
+
+  .lighting {
+    &::before,
+    &::after {
+      width: 272px;
+      height: 271px;
+      background: url("/images/lighting.svg") no-repeat;
+    }
+  }
+
+  .stars {
+    &::before,
+    &::after {
+      width: 192px;
+      height: 164px;
+      background-image: url("/images/stars.svg");
+    }
+
+    &--left-bottom {
+      &::before {
+        left: -14px;
+      }
+    }
+
+    &--right-top {
+      right: -14px;
+    }
+  }
+}
+
+.main-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.heading {
+  @include heading;
+}
+
+.subheading {
+  @include subheading;
+}
+
+.paragraph {
+  @include paragraph;
+}
