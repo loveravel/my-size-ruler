@@ -4,5 +4,15 @@
 }
 
 .button {
-  margin-top: auto;
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.back {
+  position: absolute;
+  z-index: 10;
+  top: 20px;
+  left: 17px;
 }

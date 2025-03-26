@@ -16,5 +16,6 @@
     transform: translate(-50%, -50%);
     background: url("/images/stars-bg.svg") no-repeat center;
     background-size: 100%;
+    pointer-events: none;
   }
 }

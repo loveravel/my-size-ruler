@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import cn from "classnames";
 import Logo from "~/components/Logo/Logo";
 import Button from "~/components/Button/Button";
-import posterSrc from "/public/images/poster-measurement.png?url"
-import styles from "./measurement-guide.module.scss"
+import ButtonBack from "~/components/ButtonBack/ButtonBack";
+import videoSrc from "/public/videos/measurement.mp4?url";
+import styles from "./measurement-guide.module.scss";
 
 const MeasurementScreen = () => {
   return (
@@ -12,15 +13,16 @@ const MeasurementScreen = () => {
       <div className={"stars stars--right-bottom"}/>
 
       <div className="main-inner">
+        <ButtonBack className={styles.back} />
+
         <Logo/>
 
         <p className={cn("paragraph", styles.text)}>
-          Используйте стрелки, чтобы сопоставить ширину на экране с шириной вашего эрегированного полового члена.
+          Используйте стрелки, чтобы сопоставить ширину на экране с шириной вашего <b>эрегированного</b> полового члена.
         </p>
 
         <video
-          src={""}
-          poster={posterSrc}
+          src={videoSrc}
           autoPlay
           loop
           muted
@@ -28,7 +30,7 @@ const MeasurementScreen = () => {
           style={{width: "163px", height: "auto"}}
         />
 
-        <Button href={"/measurement"} className={styles.button}>Подтвердить</Button>
+        <Button href={"/measurement"} className={styles.button} variant={"secondary"}>Хорошо</Button>
       </div>
     </main>
   );

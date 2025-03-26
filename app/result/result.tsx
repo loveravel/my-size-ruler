@@ -6,35 +6,51 @@ import WB from '~/assets/icons/wb.svg?react';
 import Ozon from '~/assets/icons/ozon.svg?react';
 import YMarket from '~/assets/icons/yandex-market.svg?react';
 import styles from './result.module.scss'
+import ButtonBack from "~/components/ButtonBack/ButtonBack";
+import {marketplaceLinks} from "~/constants";
 
 const ResultScreen = () => {
   const [size, setSize] = useState(53);
   const [color, setColor] = useState('');
 
   useEffect(() => {
-    const storedSize = parseFloat(localStorage.getItem("size") || "53");
-    const storedColor = localStorage.getItem("color") || "";
-    setSize(storedSize);
-    setColor(storedColor);
+    if (typeof window !== "undefined") {
+      const storedSize = parseFloat(localStorage.getItem("size") || "53");
+      const storedColor = localStorage.getItem("color") || "";
+
+      setSize(storedSize);
+      setColor(storedColor);
+    }
   }, []);
 
   return (
-    <main className={`top-line top-line--${size}`}>
+    <main className={cn(`top-line top-line--${size}`, styles.main)}>
       <div className={"lighting lighting--left-bottom lighting--right-top"}/>
       <div className={"stars stars--right-bottom"}/>
 
       <div className="main-inner">
+        <ButtonBack className={styles.back} />
+
         <Logo className={styles.logo} />
 
         <p className={styles.title}>Размер</p>
         <p className={styles.size} style={{ background: color }}>{size}</p>
-        <p className={styles.description}>Ваш идеальный размер здесь </p>
 
-        <div className={styles.links}>
-          <Button className={styles.link} href={"link-wb"} variant={"light"} isRounded external><><WB /><span>WILDBERRIES</span></></Button>
-          <Button className={styles.link} href={"link-ozon"} variant={"light"} isRounded external><><Ozon /><span>OZON</span></></Button>
-          <Button className={styles.link} href={"link-ymarket"} variant={"light"} isRounded external><><YMarket /><span>Яндекс.Маркет</span></></Button>
-        </div>
+        {!marketplaceLinks[size?.toString()]?.length ?
+          <p className={styles.noSize}>Сейчас презервативов такого размера нет в продаже.<br />Мы работаем над этим.</p>
+          :
+          <>
+            <p className={styles.description}>Ваш идеальный размер здесь </p>
+
+            <div className={styles.links}>
+              {marketplaceLinks[size?.toString()].map((item) => (
+                <Button className={styles.link} href={item.link} variant={"light"} isRounded external>
+                  <img src={"/images/" + item.icon} alt={"Logo " + item.name} /><span>{item.name}</span>
+                </Button>
+              ))}
+            </div>
+          </>
+        }
       </div>
     </main>
   );

@@ -1,0 +1,31 @@
+.description {
+  max-width: 160px;
+  font-family: var(--font-din), sans-serif;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-700);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.size {
+  font-family: var(--font-montserrat), sans-serif;
+  font-size: var(--font-size-mega);
+  font-weight: var(--font-weight-600);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 138px;
+  min-height: 138px;
+  max-width: 138px;
+  max-height: 138px;
+  margin-top: 105px;
+  margin-bottom: 21px;
+  border-radius: 50%;
+}
+
+.back {
+  position: absolute;
+  z-index: 10;
+  top: 20px;
+  left: 17px;
+}

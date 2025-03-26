@@ -1,16 +1,18 @@
+.main {
+  padding-bottom: 0;
+}
+
 .text {
   margin-top: 42px;
   margin-bottom: 23px;
 }
 
 .condomContainer {
-  position: fixed;
-  bottom: 0;
   width: fit-content;
-  height: 428px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100%;
 }
 
 .controls {
@@ -18,6 +20,7 @@
   justify-content: space-between;
   width: 100%;
   gap: 200px;
+  margin-top: auto;
 }
 
 .control {
@@ -36,12 +39,12 @@
 }
 
 .condom {
-  position: absolute;
-  left: 50%;
-  bottom: 0;
-  height: 410px;
-  transform: translateX(-50%);
+  position: relative;
   pointer-events: none;
+  height: 100%;
+  max-height: 460px;
+  min-height: 410px;
+  margin-bottom: -20px;
 
   svg {
     width: 100%;
@@ -52,7 +55,8 @@
 .condomInner {
   position: absolute;
   z-index: 10;
-  top: 67px;
+  //top: 60px;
+  bottom: 160px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -157,7 +161,16 @@
 }
 
 .button {
-  position: relative;
+  position: absolute;
   z-index: 10;
-  margin-top: auto;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.back {
+  position: absolute;
+  z-index: 10;
+  top: 20px;
+  left: 17px;
 }

@@ -1,16 +1,42 @@
+html,
+body {
+  overflow-y: auto;
+}
+
+.main {
+  min-height: 100vh;
+  height: 100%;
+}
+
 .text {
   margin-top: 42px;
   margin-bottom: 23px;
 }
 
 .button {
+  position: relative;
+  z-index: 10;
   margin-top: 23px;
+  margin-bottom: 20px;
 }
 
 .card {
-  position: fixed;
-  bottom: 60px;
-  right: -66px;
+  position: relative;
+  margin-top: auto;
+  left: 118px;
+  //right: -66px;
   width: 323px;
   height: 206px;
+
+  img {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.back {
+  position: absolute;
+  z-index: 10;
+  top: 20px;
+  left: 17px;
 }

@@ -7,33 +7,40 @@ import Plus from '~/assets/icons/plus.svg?react';
 import ArrowDiameter from '~/assets/icons/arrow-diameter.svg?react';
 import Condom from '~/assets/images/condom.svg?react';
 import styles from './measurment.module.scss'
+import ButtonBack from "~/components/ButtonBack/ButtonBack";
 
 const MeasurementScreen = () => {
-  const [width, setWidth] = useState(184); // Базовый размер в пикселях
-  const [scale, setScale] = useState(1); // Масштаб из калибровки
-  const minWidth = 140;
-  const maxWidth = 270;
   const scaleStep = 3.2;
 
+  const [pxPerMM, setPxPerMM] = useState<number>(1);
+  const [width, setWidth] = useState(0);
+
   useEffect(() => {
-    const storedScale = parseFloat(localStorage.getItem("scale") || "1");
-    setScale(storedScale);
+    if (typeof window !== "undefined") {
+      const storedValue = localStorage.getItem("pxPerMM");
+
+      if (storedValue) {
+        setPxPerMM(parseFloat(storedValue));
+        setWidth(parseFloat(storedValue) * 34);
+      }
+    }
   }, []);
 
-  // Рассчитываем реальный размер на экране
-  const displayWidth = width * scale;
+  // Вычисляем диаметр и обхват
+  const diameter = (width / pxPerMM).toFixed(2);
+  const circumference = (Math.PI * parseFloat(diameter)).toFixed(2);
 
   const zoomIn = () => {
-    setWidth((prev) => Math.min(prev + scaleStep, maxWidth));
+    if (Number(circumference) >= 144) return;
+
+    setWidth((prev) => Math.min(prev + scaleStep));
   };
 
   const zoomOut = () => {
-    setWidth((prev) => Math.max(prev - scaleStep, minWidth));
-  };
+    if (Number(circumference) <= 94) return;
 
-  // Вычисляем диаметр и обхват
-  const diameter = (width / 5.4).toFixed(2);
-  const circumference = (Math.PI * parseFloat(diameter)).toFixed(2);
+    setWidth((prev) => Math.max(prev - scaleStep));
+  };
 
   // Определяем размер и цвет
   const getSizeAndColor = (circumference: number) => {
@@ -49,15 +56,20 @@ const MeasurementScreen = () => {
   };
 
   const { size, color } = getSizeAndColor(parseFloat(circumference));
-  localStorage.setItem("size", size.toString());
-  localStorage.setItem("color", color);
+
+  if (typeof window !== "undefined") {
+    localStorage.setItem("size", size.toString());
+    localStorage.setItem("color", color);
+  }
 
   return (
-    <main className={`top-line top-line--${size}`}>
+    <main className={cn(`top-line top-line--${size}`, styles.main)}>
       <div className={"lighting lighting--right-top"}/>
       <div className={"stars stars--left-bottom"}/>
 
       <div className="main-inner">
+        <ButtonBack className={styles.back} />
+
         <Logo />
 
         <p className={cn("paragraph", styles.text)}>
@@ -65,13 +77,12 @@ const MeasurementScreen = () => {
           ширину на экране с шириной вашего полового члена в состоянии эрекции.
         </p>
 
-
         <div className={styles.condomContainer}>
           <div className={styles.controls}>
-            <button className={styles.control} onClick={zoomOut} disabled={width <= minWidth}>
+            <button className={styles.control} onClick={zoomOut}>
               <Minus/>
             </button>
-            <button className={styles.control} onClick={zoomIn} disabled={width >= maxWidth}>
+            <button className={styles.control} onClick={zoomIn}>
               <Plus/>
             </button>
           </div>
@@ -79,7 +90,7 @@ const MeasurementScreen = () => {
           <div
             className={styles.condom}
             style={{
-              width: `${displayWidth}px`,
+              width: `${width}px`,
             }}
           >
             <div className={styles.condomInner}>

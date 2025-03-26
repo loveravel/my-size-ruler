@@ -10,15 +10,17 @@ const DesktopWarning: React.FC = () => {
         <div className={"lighting lighting--left-top lighting--right-bottom"}/>
 
         <div className={cn("main-inner", styles.mainInner)}>
-          <Logo className={styles.logo} width={194}/>
+          <Logo className={styles.logo} width={140}/>
 
-          <p className={styles.title}>Приложение для подбора идеального размера презерватива</p>
-          <p className={cn("paragraph", styles.text)}>
-            Данное приложение было разработано<br/>специально для смартфонов.
-            <br/>
-            <br/>
-            Пожалуйста, откройте страницу<br/>с мобильного устройства.
-          </p>
+          <div>
+            <p className={styles.title}>Приложение для подбора идеального размера презерватива</p>
+            <p className={cn("paragraph", styles.text)}>
+              Данное приложение было разработано<br/>специально для смартфонов.
+              <br/>
+              <br/>
+              Пожалуйста, откройте страницу<br/>с мобильного устройства.
+            </p>
+          </div>
 
           <div className={styles.qr}>
             <QR/>

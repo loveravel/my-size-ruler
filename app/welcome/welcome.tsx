@@ -21,7 +21,7 @@ export function Welcome() {
 
         <CondomSizes className={styles.sizes}/>
 
-        <p className={cn(styles.text, "subheading")}>Это быстрый и анонимный способ узнать размер подходящего Вам презерватива My.Size</p>
+        <p className={cn(styles.text, "subheading")}>Узнай размер<br />своего идеального<br />презерватива!</p>
 
         <Button className={styles.button} href={"/calibration-guide"} variant={"secondary"}>Далее</Button>
       </div>

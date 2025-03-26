@@ -23,20 +23,34 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const [isPortrait, setIsPortrait] = useState<boolean>(true);
-  const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(true);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const handleResize = () => {
         setIsPortrait(window.innerHeight > window.innerWidth);
-        setIsMobile(window.innerWidth <= 768);
+        setIsMobile(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+      };
+
+      const handleTouchMove = (event: TouchEvent) => {
+        if (event.touches.length > 1) {
+          event.preventDefault();
+        }
+      };
+
+      const handleGestureStart = (event: Event) => {
+        event.preventDefault();
       };
 
       handleResize();
       window.addEventListener("resize", handleResize);
+      document.addEventListener("touchmove", handleTouchMove, { passive: false });
+
 
       return () => {
         window.removeEventListener("resize", handleResize);
+        document.removeEventListener("touchmove", handleTouchMove);
+        document.removeEventListener("gesturestart", handleGestureStart);
       };
     }
   }, []);
@@ -45,7 +59,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <html lang="en">
     <head>
       <meta charSet="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
       <Meta />
       <Links />
     </head>

@@ -6,5 +6,6 @@ export default [
   route("calibration", './routes/calibration.tsx'),
   route("measurement-guide", './routes/measurement-guide.tsx'),
   route("measurement", './routes/measurement.tsx'),
+  route("result-only", './routes/result-only.tsx'),
   route("result", './routes/result.tsx'),
 ] satisfies RouteConfig;

@@ -1,11 +1,13 @@
 .elite {
   margin: 10px 112px 36px;
+  width: 15vw;
   max-width: 128px;
 }
 
 .packs {
   position: relative;
   margin: 0 40px 32px;
+  width: 50vw;
   max-width: 380px;
 
   img {
@@ -27,7 +29,7 @@
 }
 
 .sizes {
-  margin-bottom: 60px;
+  margin-bottom: 28px;
 }
 
 .text {
@@ -35,5 +37,9 @@
 }
 
 .button {
-  margin-top: auto;
+  position: absolute;
+  z-index: 10;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
 }

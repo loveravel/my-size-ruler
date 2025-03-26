@@ -5,22 +5,31 @@ import Button from "~/components/Button/Button";
 import cardImage from '/images/card.png?url';
 import styles from "./calibration.module.scss";
 import RangeInput from "~/components/RangeInput/RangeInput";
+import ButtonBack from "~/components/ButtonBack/ButtonBack";
 
 export default function CalibrationScreen() {
-  const [scale, setScale] = useState(() => {
-    return parseFloat(localStorage.getItem("scale") || "1");
-  });
+  const cardWidthMM = 85.6; // Стандартная ширина банковской карты в мм
+  const cardHeightMM = 53.98; // Стандартная высота банковской карты
+  const [height, setHeight] = useState(206);
+  const [pxPerMM, setPxPerMM] = useState(0);
 
   useEffect(() => {
-    localStorage.setItem("scale", scale.toString());
-  }, [scale]);
+    const pxPerMM = height / cardHeightMM;
+    setPxPerMM(pxPerMM);
+
+    if (typeof window !== "undefined") {
+      localStorage.setItem("pxPerMM", pxPerMM.toString());
+    }
+  }, [height]);
 
   return (
-    <main className={"top-line top-line--common"}>
+    <main className={cn("top-line top-line--common", styles.main)}>
       <div className={"lighting lighting--right-top"} />
       <div className={"stars stars--left-bottom"} />
 
       <div className="main-inner">
+        <ButtonBack className={styles.back} />
+
         <Logo width={70} />
 
         <p className={cn(styles.text, "paragraph")}>
@@ -28,11 +37,11 @@ export default function CalibrationScreen() {
         </p>
 
         <RangeInput
-          min={0.75}
-          max={1.5}
-          step={0.01}
-          value={scale}
-          onChange={(value) => setScale(value)}
+          min={100}
+          max={370}
+          step={1}
+          value={height}
+          onChange={(value) => setHeight(value)}
         />
 
         <Button className={styles.button} href={"/measurement-guide"} variant={"secondary"}>Подтвердить</Button>
@@ -40,7 +49,8 @@ export default function CalibrationScreen() {
         <div
           className={styles.card}
           style={{
-            transform: `scale(${scale})`,
+            height: `${height}px`,
+            width: `${pxPerMM * cardWidthMM}px`,
             transition: "0.2s ease",
           }}
         >
