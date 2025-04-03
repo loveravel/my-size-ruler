@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import cn from "classnames";
 import Logo from "~/components/Logo/Logo";
 import Button from "~/components/Button/Button";
-import WB from '~/assets/icons/wb.svg?react';
-import Ozon from '~/assets/icons/ozon.svg?react';
-import YMarket from '~/assets/icons/yandex-market.svg?react';
-import styles from './result.module.scss'
 import ButtonBack from "~/components/ButtonBack/ButtonBack";
-import {marketplaceLinks} from "~/constants";
+import { marketplaceLinks } from "~/constants";
+import styles from './result.module.scss';
 
 const ResultScreen = () => {
   const [size, setSize] = useState(53);
@@ -44,7 +41,7 @@ const ResultScreen = () => {
 
             <div className={styles.links}>
               {marketplaceLinks[size?.toString()].map((item) => (
-                <Button className={styles.link} href={item.link} variant={"light"} isRounded external>
+                <Button key={item.name} className={styles.link} href={item.link} variant={"light"} isRounded external>
                   <img src={"/images/" + item.icon} alt={"Logo " + item.name} /><span>{item.name}</span>
                 </Button>
               ))}
